@@ -1,42 +1,47 @@
-
 import streamlit as st
 import pandas as pd
 import time
-from datetime import datetime
 
-st.set_page_config(page_title="S2M Admin Panel", layout="wide")
-st.markdown(
-    """
+# Load login credentials CSV
+df = pd.read_csv("Login tracking (1).csv")
+df.columns = df.columns.str.strip()
+
+st.set_page_config(page_title="Admin Login", layout="centered")
+
+# Styling
+st.markdown("""
     <style>
-        .stTextInput>div>div>input {
-            border: 2px solid black;
-        }
-        .stTextInput>div>div {
-            background-color: white;
-        }
+    .stTextInput>div>div>input {
+        background-color: black;
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+    }
+    .stButton>button {
+        background-color: skyblue;
+        color: black;
+        font-weight: bold;
+    }
     </style>
-    """, unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
-def show_logo():
-    st.image("s2m-logo.png", width=150)
+st.image("s2m-logo.png", width=200)
+st.title("🔐 Admin Login")
 
-def login():
-    show_logo()
-    st.title("Admin Login Panel")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    login_button = st.button("Sign In")
+username = st.text_input("Username")
+password = st.text_input("Password", type="password")
 
-    if login_button:
-        with st.spinner("Signing in..."):
-            time.sleep(2)
-            df = pd.read_csv("Login tracking (1).csv")
-            if any((df["Username"] == username) & (df["Password"] == password)):
-                st.success("Login successful!")
-                st.session_state.logged_in = True
-            else:
-                st.error("Invalid credentials")
+if st.button("Sign In"):
+    if "Username" in df.columns and "Password" in df.columns:
+        if any((df["Username"] == username) & (df["Password"] == password)):
+            with st.spinner("Authenticating..."):
+                time.sleep(2)
+            st.success("Login Successful ✅")
+            st.switch_page("pages/2_Dashboard.py")
+        else:
+            st.error("❌ Invalid Username or Password")
+    else:
+        st.error("❌ 'Username' or 'Password' column not found in CSV!")
 
 def admin_dashboard():
     st.title("Admin Dashboard")
