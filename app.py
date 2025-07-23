@@ -38,7 +38,6 @@ if st.button("Sign In"):
                 time.sleep(2)
             st.success("Login Successful ✅")
             if st.session_state.get('page') == 'dashboard':
-                show_dashboard()
             else:
             show_dashboard()
    def admin_dashboard():
