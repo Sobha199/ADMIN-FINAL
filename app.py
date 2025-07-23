@@ -30,7 +30,7 @@ st.title("🔐 Admin Login")
 
 username = st.text_input("Username")
 password = st.text_input("Password", type="password")
-
+login_button = st.button("Login")
 if login_button:
         with st.spinner("Signing in..."):
             time.sleep(2)
