@@ -41,7 +41,7 @@ if login_button:
             else:
                 st.error("Invalid credentials")
                 
-   def admin_dashboard():
+def admin_dashboard():
     st.title("Admin Dashboard")
     df = pd.read_csv("Login tracking (1).csv")
 
