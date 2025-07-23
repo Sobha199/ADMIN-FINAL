@@ -40,11 +40,8 @@ if st.button("Sign In"):
             if st.session_state.get('page') == 'dashboard':
                 show_dashboard()
             else:
-            st.error("❌ Invalid Username or Password")
-    else:
-        st.error("❌ 'Username' or 'Password' column not found in CSV!")
-
-def admin_dashboard():
+            show_dashboard()
+   def admin_dashboard():
     st.title("Admin Dashboard")
     df = pd.read_csv("Login tracking (1).csv")
 
