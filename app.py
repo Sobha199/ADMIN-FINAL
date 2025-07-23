@@ -49,7 +49,7 @@ def admin_dashboard():
     st.metric("Total HC", len(df))
 
     st.subheader("Tenurity Wise Deviation")
-    st.write("Available columns:", df.columns.tolist())
+    st.write("Tenure:", df.columns.tolist())
     df['DOJ'] = pd.to_datetime(df['DOJ'], errors='coerce')
     df['TenureMonths'] = ((pd.to_datetime('today') - df['DOJ'])/pd.Timedelta(days=30)).fillna(0).astype(int)
 
