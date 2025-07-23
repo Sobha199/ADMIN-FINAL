@@ -38,6 +38,7 @@ if st.button("Sign In"):
                 time.sleep(2)
             st.success("Login Successful ✅")
             if st.session_state.get('page') == 'dashboard':
+                show_dashboard()
             else:
             st.error("❌ Invalid Username or Password")
     else:
