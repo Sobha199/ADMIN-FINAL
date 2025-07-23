@@ -31,15 +31,15 @@ st.title("🔐 Admin Login")
 username = st.text_input("Username")
 password = st.text_input("Password", type="password")
 
-if st.button("Sign In"):
-    if "Username" in df.columns and "Password" in df.columns:
-        if any((df["Username"] == username) & (df["Password"] == password)):
-            with st.spinner("Authenticating..."):
-                time.sleep(2)
-            st.success("Login Successful ✅")
-            if st.session_state.get('page') == 'dashboard':
+if login_button:
+        with st.spinner("Signing in..."):
+            time.sleep(2)
+            df = pd.read_csv("Login tracking (1).csv")
+            if any((df["Username"] == username) & (df["Password"] == password)):
+                st.success("Login successful!")
+                st.session_state.logged_in = True
             else:
-            show_dashboard()
+                st.error("Invalid credentials")
    def admin_dashboard():
     st.title("Admin Dashboard")
     df = pd.read_csv("Login tracking (1).csv")
