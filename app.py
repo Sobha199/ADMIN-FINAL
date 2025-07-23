@@ -37,7 +37,8 @@ if st.button("Sign In"):
             with st.spinner("Authenticating..."):
                 time.sleep(2)
             st.success("Login Successful ✅")
-            st.switch_page("pages/2_Dashboard.py")
+            st.session_state['page'] = 'dashboard':
+            show_dashboard()
         else:
             st.error("❌ Invalid Username or Password")
     else:
